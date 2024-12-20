@@ -65,6 +65,8 @@ public final class Message extends MessageOrPresence<MessageBuilder>
 
     private Type type;
     private SubType subType;
+    private String senderFirstName;
+    private String senderLastName;
 
     /**
      * Creates a new, "normal" message.
@@ -148,6 +150,8 @@ public final class Message extends MessageOrPresence<MessageBuilder>
         super(messageBuilder);
         type = messageBuilder.type;
         subType = messageBuilder.getSubType();
+        senderFirstName = messageBuilder.getSenderFirstName();
+        senderLastName = messageBuilder.getSenderLastName();
     }
 
     /**
@@ -163,6 +167,8 @@ public final class Message extends MessageOrPresence<MessageBuilder>
         super(other);
         this.type = other.type;
         this.subType = other.subType;
+        this.senderFirstName = other.senderFirstName;
+        this.senderLastName = other.senderLastName;
     }
 
     @Override
@@ -190,6 +196,16 @@ public final class Message extends MessageOrPresence<MessageBuilder>
         return subType;
     }
 
+    @Override
+    public String getSenderFirstName() {
+        return senderFirstName;
+    }
+
+    @Override
+    public String getSenderLastName() {
+        return senderLastName;
+    }
+
     /**
      * Sets the subtype of the message.
      *
@@ -197,6 +213,16 @@ public final class Message extends MessageOrPresence<MessageBuilder>
      */
     public void setSubType(final SubType subType) {
         this.subType = subType;
+    }
+
+    /**
+     * Sets the sender name of the message.
+     *
+     * @params sender first and last name of the message.
+     */
+    public void setSenderName(final String senderFirstName, final String senderLastName) {
+        this.senderFirstName = senderFirstName;
+        this.senderLastName = senderLastName;
     }
 
     /**
@@ -409,6 +435,12 @@ public final class Message extends MessageOrPresence<MessageBuilder>
         if (subType != null) {
             sb.append("subtype=").append(subType).append(',');
         }
+        if (senderFirstName != null) {
+            sb.append("sender_first_name=").append(senderFirstName).append(',');
+        }
+        if (senderLastName != null) {
+            sb.append("sender_last_name=").append(senderLastName).append(',');
+        }
         sb.append(']');
         return sb.toString();
     }
@@ -419,6 +451,8 @@ public final class Message extends MessageOrPresence<MessageBuilder>
         addCommonAttributes(buf);
         buf.optAttribute("type", type);
         buf.optAttribute("subtype", subType);
+        buf.optAttribute("sender_first_name", senderFirstName);
+        buf.optAttribute("sender_last_name", senderLastName);
         buf.rightAngleBracket();
 
         // Append the error subpacket if the message type is an error.

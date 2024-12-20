@@ -29,6 +29,8 @@ public final class MessageBuilder extends MessageOrPresenceBuilder<Message, Mess
 
     Message.Type type;
     private Message.SubType subType;
+    private String senderFirstName;
+    private String senderLastName;
 
     MessageBuilder(Message message, String stanzaId) {
         super(message, stanzaId);
@@ -51,6 +53,8 @@ public final class MessageBuilder extends MessageOrPresenceBuilder<Message, Mess
     private void copyFromMessage(Message message) {
         type = message.getType();
         subType = message.getSubType();
+        senderFirstName = message.getSenderFirstName();
+        senderLastName = message.getSenderLastName();
     }
 
     @Override
@@ -65,6 +69,12 @@ public final class MessageBuilder extends MessageOrPresenceBuilder<Message, Mess
 
     public MessageBuilder setSubType(final Message.SubType subType) {
         this.subType = subType;
+        return getThis();
+    }
+
+    public MessageBuilder setSenderName(final String senderFirstName, final String senderLastName) {
+        this.senderFirstName = senderFirstName;
+        this.senderLastName = senderLastName;
         return getThis();
     }
 
@@ -172,5 +182,15 @@ public final class MessageBuilder extends MessageOrPresenceBuilder<Message, Mess
     @Override
     public Message.SubType getSubType() {
         return subType;
+    }
+
+    @Override
+    public String getSenderFirstName() {
+        return senderFirstName;
+    }
+
+    @Override
+    public String getSenderLastName() {
+        return senderLastName;
     }
 }

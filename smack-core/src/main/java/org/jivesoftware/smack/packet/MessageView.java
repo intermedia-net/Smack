@@ -44,6 +44,20 @@ public interface MessageView extends StanzaView {
     Message.SubType getSubType();
 
     /**
+     * Returns sender first name of the message.
+     *
+     * @return the sender first name of the message.
+     */
+    String getSenderFirstName();
+
+    /**
+     * Returns the sender last name of the message.
+     *
+     * @return the sender last name of the message.
+     */
+    String getSenderLastName();
+
+    /**
      * Returns the default subject of the message, or null if the subject has not been set.
      * The subject is a short description of message contents.
      * <p>

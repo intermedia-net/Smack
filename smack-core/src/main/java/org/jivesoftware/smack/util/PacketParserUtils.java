@@ -172,6 +172,9 @@ public class PacketParserUtils {
         if (subTypeString != null) {
             message.setSubType(Message.SubType.fromString(subTypeString));
         }
+        String senderFirstName = parser.getAttributeValue("", "sender_first_name");
+        String senderLastName = parser.getAttributeValue("", "sender_last_name");
+        message.setSenderName(senderFirstName, senderLastName);
 
         // Parse sub-elements. We include extra logic to make sure the values
         // are only read once. This is because it's possible for the names to appear
